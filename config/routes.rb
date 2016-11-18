@@ -32,11 +32,13 @@ Rails.application.routes.draw do
       get 'following'
       get 'favorites'
       get 'retweets'
+      get 'likes'
     end
   end 
 
   resources :relationships, only: [:create, :destroy]
-  resources :favorites, only: [:create, :destroy, :creates, :destroys]
+  resources :favorites, only: [:create, :destroy]
+  resources :likes, only: [:create, :destroy]
   resources :retweets, only: [:create, :destroy]
   resources :find_friends, only: :index
   

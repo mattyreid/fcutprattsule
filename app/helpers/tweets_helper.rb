@@ -18,5 +18,13 @@ module TweetsHelper
   def can_retweet?(tweet_id)
     Tweet.find(tweet_id).user != current_user
   end
+  
+   def get_like(tweet_id)
+    current_user.likes.find_by(tweet_id: tweet_id)
+   end
+
+  def tweet_liked?(tweet_id)
+    !get_like(tweet_id).nil?
+  end
 
 end

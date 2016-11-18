@@ -25,8 +25,8 @@ class PagesController < ApplicationController
   
   # back-end code for pages/search
   def search_results
-    @tweets = Tweet.where("user_id in (?) OR user_id = ?", current_user.friend_ids, current_user).paginate(page: params[:page]).order('created_at DESC')
     @tweets = Tweet.search(params[:search])
+    @user = User.search(params[:search])
     @tofollow = User.all.last(5)
   end
 end 

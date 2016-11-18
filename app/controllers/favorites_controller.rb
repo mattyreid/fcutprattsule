@@ -15,19 +15,5 @@ class FavoritesController < ApplicationController
       format.js
     end
   end
-  
-  def creates
-    @favorite = Favorite.find(params[:id])
-    respond_to do |format|
-      format.js
-    end 
-  end 
-  
-  def destroys
-    @favorite = Favorite.find(params[:id])
-    respond_to do |format|
-      format.js
-    end 
-  end 
 
 end

@@ -56,6 +56,14 @@ class UsersController < ApplicationController
     end
   end
   
+  def likes
+    @likes = @user.tweets.joins(:likes).paginate(page: params[:page])
+    respond_to do |format|
+      format.js
+      format.html
+    end
+  end
+  
   private
   def user_params
     params.require(:user).permit(:name, :username, :password,
@@ -65,7 +73,7 @@ class UsersController < ApplicationController
   def check_user
     if @user != current_user
       redirect_to root_path
-    end
+    end 
   end
 
   def set_user

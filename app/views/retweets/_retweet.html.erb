@@ -23,9 +23,9 @@
       <% end %>
       <span id="retweet-<%= retweet.id %>">
         <%= render 'retweets/retweet_button', tweet_id: retweet.source_tweet.id %>
-      </span>
-      <span id="favor-tweet-<%= retweet.id %>">
+        <span id="favor-tweet-<%= retweet.id %>">
         <%= render 'favorites/favorite_button', tweet_id: retweet.id %>
+      </span>
       </span>
     </div>
   </div>

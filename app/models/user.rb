@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   has_many :inverse_relationships, class_name: "Relationship", foreign_key: "friend_id"
   has_many :inverse_friends, through: :inverse_relationships, source: :user
   has_many :favorites
+  has_many :likes
   has_many :retweets, foreign_key: "retweeter_id"
 
   mount_uploader :avatar, AvatarUploader
@@ -33,5 +34,9 @@ class User < ActiveRecord::Base
       where(conditions).first
     end
   end
+  
+  def self.search(search)
+  where("name LIKE ?", "%#{search}%")
+  end 
 
 end

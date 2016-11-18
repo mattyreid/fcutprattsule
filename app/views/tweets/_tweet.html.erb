@@ -1,15 +1,15 @@
 <div id="tweet-<%= tweet.id %>" class="micropost">
-  <div class="content">
+      <div class="content">
     <div class="avatar-content">
       <%= link_to tweet.user do %>
-        <%= render 'partials/avatar', user: tweet.user, klass: 'avatar' %>
+     <%= render 'partials/avatar', user: tweet.user, klass: 'avatar' %>
       <% end %>
     </div>
     <div class="post-content">
       <%= link_to tweet.user do %>
         <span class="name"><%= tweet.user.name %></span>
-      <% end %>
       <%= link_to tweet.user do %>
+      <% end %>
         <span class="username">@<%= tweet.user.username %></span>
       <% end %>
       <div class="post">
