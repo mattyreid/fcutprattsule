@@ -4,6 +4,7 @@ class FindFriendsController < ApplicationController
 
   def index
     @users = User.all.last(5)
+    @tofollow = User.all.last(6)
     respond_to do |format|
       format.js
       format.html

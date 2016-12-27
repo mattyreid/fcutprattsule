@@ -47,6 +47,9 @@ end
 
 gem 'devise'
 gem 'carrierwave'
+gem 'carrierwave-video'
+gem 'carrierwave-video-thumbnailer'
+gem 'streamio-ffmpeg'
 gem 'friendly_id', '~> 5.0.0'
 
 gem 'will_paginate', '~> 3.0.6'
@@ -55,6 +58,16 @@ gem 'backstretch-rails'
 gem 'remotipart', '~> 1.2'
 gem 'counter_culture', '~> 0.1.23'
 gem 'rails_autolink'
+gem "mailboxer"
+gem 'gravatar_image_tag'
+gem 'chosen-rails'
+gem "socialization"
+gem 'impressionist'
+gem 'acts_as_votable', '~> 0.10.0'
+gem "punching_bag"
+gem 'simple_hashtag'
+gem 'public_activity'
+gem 'acts_as_commentable_with_threading'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

@@ -25,6 +25,19 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
   mount_uploader :cover, CoverUploader
+  
+  acts_as_messageable
+  
+  acts_as_liker
+  
+  is_impressionable
+  
+  acts_as_votable
+  
+  def mailboxer_email(object)
+   #return the model's email here
+  end
+
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
@@ -38,5 +51,7 @@ class User < ActiveRecord::Base
   def self.search(search)
   where("name LIKE ?", "%#{search}%")
   end 
-
+  
+  include PublicActivity::Model
+  tracked
 end

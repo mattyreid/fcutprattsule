@@ -6,13 +6,15 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   
   # Define Routes for Pages
-  get '/messages' => 'pages#home'
+  get '/messages' => 'conversations#index'
   get '/index' => 'home#index'
   get '/notifications' => 'pages#profile'
   get '/explore' => 'pages#explore'
   get '/search' => 'pages#search', as:'search'
   get 'search_results' => 'pages#search_results', as: 'search_results'
-  
+  get 'hashtags/',         to: 'hashtags#index',     as: :hashtags
+  get 'hashtags/:hashtag', to: 'hashtags#show',      as: :hashtag
+
   authenticated :user do
     root to: "home#index", as: "home"
   end
@@ -25,7 +27,13 @@ Rails.application.routes.draw do
       post :reply
     end
   end
-  
+
+resources :tweets do 
+  member do
+    put "like", to: "tweets#like"
+  end
+end
+
   resources :users, except: [:new, :create] do
     member do
       get 'followers'
@@ -41,6 +49,14 @@ Rails.application.routes.draw do
   resources :likes, only: [:create, :destroy]
   resources :retweets, only: [:create, :destroy]
   resources :find_friends, only: :index
+  resources :messages, only: [:new, :create]
+  resources :conversations, only: [:index, :show, :destroy] do
+  resources :comments
+  
+  member do
+    post :reply
+  end
+ end
   
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

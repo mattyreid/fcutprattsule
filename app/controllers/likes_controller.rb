@@ -4,6 +4,7 @@ class LikesController < ApplicationController
 
   def create
     @like = Likes.new(tweet_id: params[:tweet_id], user: current_user)
+    @activities = PublicActivity::Activity.order("created_at desc")
     respond_to do |format|
       format.js
     end

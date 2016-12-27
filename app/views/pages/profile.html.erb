@@ -1,2 +1,40 @@
-<h1>Pages#profile</h1>
-<p>Find me in app/views/pages/profile.html.erb</p>
+<div class="row">
+  <div class="col-lg-3">
+    <div class="well">
+      <div class="panel-body">
+    <h5 style="color: grey; font-size 125%;">Suggested Users</h5>
+ <% for @u in @tofollow do %>
+ <p style="font-weight: bold; opacity: 0.85;" ><a href="/users/<%= @u.username %>"><%= @u.username %></a></p>
+ <% end %>
+  </div>
+  </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="row">
+      <div class="col-lg-12">
+          <%= render_activities(@activities) %>
+        </div>
+      </div>
+    <div class="row">
+      <div class="col-lg-12">
+    <div id="feed" class="well feed">
+    </div>
+    <div id="load-more">
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="col-lg-3">
+    <div class="well">
+      <div class="panel-body">
+ <h5 style="color: grey; font-size 125%;">Trending</h5>
+ <ul>
+         <% @hashtags.each do |hashtag| %>
+         <% if hashtag.hashtaggables.count > 4%>
+         </li><%= link_to hashtag.name, hashtag_path(hashtag.name) %><li>
+         <h5 style="color: grey; font-size 125%;"><%= hashtag.hashtaggables.size %> Posts</h5>
+         <% end -%>
+         <% end %>
+         </ul>
+    </div>
+  </div>

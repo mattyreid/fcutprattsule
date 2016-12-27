@@ -17,4 +17,7 @@
 //= require bindWithDelay
 //= require jquery.autosize.min
 //= require jquery.remotipart
-//= require_tree .
+//= require_tree
+//= require chosen-jquery
+//= require messages
+

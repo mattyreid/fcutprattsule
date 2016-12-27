@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
-
+  
   before_action :set_user
   before_action :check_user, only: [:edit, :update, :destroy]
   before_action :authenticate_user!
+  impressionist actions: [:favorites], unique: [:session_hash]
 
   def show
     @tweets = @user.tweets.paginate(page: params[:page]).order('created_at DESC')
@@ -42,14 +43,18 @@ class UsersController < ApplicationController
 
   def favorites
     @favorites = @user.tweets.joins(:favorites).paginate(page: params[:page])
+    @tofollow = User.all.first(3)
+    impressionist(@user)
+    @hashtags = SimpleHashtag::Hashtag.all
+    @activities = PublicActivity::Activity.order("created_at desc")
     respond_to do |format|
       format.js
       format.html
     end
   end
-
+  
   def retweets
-    @retweets = @user.retweets.paginate(page: params[:page]).order('created_at DESC')
+    @retweets = @user.retweeter_id.paginate(page: params[:page]).order('created_at DESC')
     respond_to do |format|
       format.js
       format.html
@@ -58,6 +63,7 @@ class UsersController < ApplicationController
   
   def likes
     @likes = @user.tweets.joins(:likes).paginate(page: params[:page])
+    @activities = PublicActivity::Activity.order("created_at desc")
     respond_to do |format|
       format.js
       format.html

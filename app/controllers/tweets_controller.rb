@@ -1,12 +1,13 @@
 class TweetsController < ApplicationController
 
   before_action :authenticate_user!
-
+ 
   def create
     @tweet = Tweet.new(tweet_params) do |tweet|
       tweet.user = current_user
       tweet.parent_id = params[:parent_id]
-    end
+      @activities = PublicActivity::Activity.order("created_at desc")
+    end 
     respond_to do |format|
       format.js
     end
@@ -15,6 +16,7 @@ class TweetsController < ApplicationController
   def update
     @tweet = Tweet.find(params[:id])
     @tweet.update(tweet_params)
+    @activities = PublicActivity::Activity.order("created_at desc")
     respond_to do |format|
       format.js
     end
@@ -34,10 +36,17 @@ class TweetsController < ApplicationController
       format.js
     end
   end
-
+  
+  
+  def like 
+  @tweet = Tweet.find(params[:id])
+  @tweet.like_by current_user
+  redirect_to :back
+  end  
+  
   private
   def tweet_params
-    params.require(:tweet).permit(:tweet_text, :location, :media)
+    params.require(:tweet).permit(:tweet_text, :location, :media, :video, :tag_list)
   end
-
-end
+  
+end 

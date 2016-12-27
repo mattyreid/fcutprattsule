@@ -26,5 +26,5 @@ module TweetsHelper
   def tweet_liked?(tweet_id)
     !get_like(tweet_id).nil?
   end
-
+  
 end

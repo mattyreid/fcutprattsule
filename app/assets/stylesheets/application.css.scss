@@ -17,8 +17,16 @@
 @import "font-awesome";
 @import "*";
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
+@import 'chosen';
 
 body {
   font-family: 'Lato';
   padding-top: 75px;
+}
+
+.messages {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 1em;
+  margin-top: 1em;
 }
